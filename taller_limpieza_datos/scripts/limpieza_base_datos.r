@@ -55,7 +55,7 @@ base <- read_delim(
   file = ruta_entrada,
   delim = ";",
   locale = locale(encoding ="windows-1252"),
-  na = c("N/D"),
+  na = c("N/D","-"),
   col_types = cols(.default = col_character()),
   trim_ws = FALSE,
   show_col_types = FALSE
