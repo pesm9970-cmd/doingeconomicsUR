@@ -33,7 +33,7 @@ print(lineas_iniciales)
 
 # TODO 1:
 # Identifique:
-# a) el delimitador;
+# a) el delimitador;;
 # b) la codificación del archivo;
 # c) las cadenas que representan valores perdidos.
 
@@ -53,9 +53,9 @@ print(lineas_iniciales)
 
 base <- read_delim(
   file = ruta_entrada,
-  delim = "COMPLETAR",
-  locale = locale(encoding = "COMPLETAR"),
-  na = c("COMPLETAR"),
+  delim = ";",
+  locale = locale(encoding ="windows-1252"),
+  na = c("N/D"),
   col_types = cols(.default = col_character()),
   trim_ws = FALSE,
   show_col_types = FALSE
@@ -87,8 +87,10 @@ base <- base %>%
   mutate(
     nombre = recode(
       nombre,
-      " Ana María López " = "Ana María López"
-      # TODO: agregue aquí el otro nombre que necesita corrección.
+      " Ana María López " = "Ana María López",
+      
+      # TODO:  ;
+      "JOSE MUÑOZ" = "Jose Muñoz",
       # Recuerde poner una coma al final de la línea anterior.
     )
   )
@@ -102,9 +104,11 @@ base <- base %>%
   mutate(
     ciudad = recode(
       ciudad,
-      "Bogotá " = "Bogotá"
+      "Bogotá " = "Bogotá",
       # TODO: agregue las demás ciudades que necesitan corrección.
-      #
+      "medellín" = "Medellín",
+      "CALI",
+      " bogotá"="Bogotá",
       # Ejemplo:
       # "valor original" = "valor corregido",
     )
@@ -121,8 +125,13 @@ base <- base %>%
   mutate(
     fecha_encuesta = recode(
       fecha_encuesta,
-      "03/08/2026" = "2026-08-03"
+      "03/08/2026" = "2026-08-03",
       # TODO: agregue una línea para cada fecha que todavía
+      "5 agosto 2026" = "2026-08-05",
+      "2026/08/07" = "2026-08-07",
+      "08.08.2026" = "2026-08-08",
+      "08/13/2026" = "2026-08-13",
+      
       # no tenga el formato AAAA-MM-DD.
     )
   )
@@ -149,7 +158,10 @@ base <- base %>%
   mutate(
     ingreso_mensual = recode(
       ingreso_mensual,
-      "1.250.000,50" = "1250000.50"
+      "1.250.000,50" = "1250000.50",
+      "1,100,000.00" = "1100000.00",
+      "875.500,00" = "875500.00",
+      "1 050 000,25" = "1050000.25"
       # TODO: agregue los demás ingresos que necesitan corrección.
     )
   )
@@ -172,7 +184,10 @@ base <- base %>%
   mutate(
     nota_promedio = recode(
       nota_promedio,
-      "4,2" = "4.2"
+      "4,2" = "4.2",
+      "4,0" = "4.0",
+      "3,5" = "3.5",
+      "4,1" = "4.1",
       # TODO: agregue las demás notas que usan coma.
     )
   )
@@ -195,7 +210,12 @@ base <- base %>%
   mutate(
     trabaja = recode(
       trabaja,
-      "si " = "Sí"
+      "si " = "Sí",
+      "NO" = "No",
+      "Sí " = "Sí",
+      "Sí " = "Sí",
+      "sí" = "Sí",
+      "no" = "No"
       # TODO: agregue las demás maneras de escribir Sí y No.
     )
   )
@@ -243,3 +263,4 @@ write_csv(
 )
 
 print("La base limpia fue guardada en resultados/base_limpia.csv")
+
